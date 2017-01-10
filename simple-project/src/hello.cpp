@@ -1,19 +1,31 @@
 #include<iostream>
 #include"console.h"
+
 using namespace std;
 
-const int SENTINEL = 0;
+/* Function prototypes */
+int combination(int n, int k);
+int fact(int n);
+
+/* Main program */
 int main() {
-    cout<<"This program adds a list of numbers "<<endl;
-    cout<<"Use "<<SENTINEL<<" to signal the end."<<endl;
-    int total = 0;
-    while(true) {
-        int value;
-        cout<<" ? ";
-        cin>>value;
-        if(value == SENTINEL) break;
-        total += value;
-    }
-    cout<<"The total is "<<total<<endl;
+    int n, k;
+    cout << "Enter the number of objects(n): ";
+    cin >> n;
+    cout << "Enter the number to be chosen(k): ";
+    cin >> k;
+    cout << "C(n, k) = " << combination(n, k) << endl;
     return 0;
+}
+
+int combination(int n, int k) {
+    return fact(n) / (fact(k) * fact(n - k));
+}
+
+int fact(int n) {
+    int result = 1;
+    for(int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
 }
