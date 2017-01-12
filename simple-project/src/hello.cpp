@@ -1,14 +1,29 @@
-#include "gobjects.h"
-#include <iostream>
+#include "gwindow.h"
 
-using namespace std;
+void drawDiamond(GWindow &gw);
+void drawRectangleAndOval(GWindow &gw);
 
 int main() {
-    initGraphics();
-    setColor("BLUE");
-    fillRect(50, 50, 300, 150);
-    setFont("SansSerif-Bold-48");
-    setColor("WHITE");
-    drawString("hello, world", 60, 140);
+    GWindow gw;
+    drawDiamond(gw);
+    drawRectangleAndOval(gw);
     return 0;
+}
+
+void drawDiamond(GWindow &gw) {
+    double width = gw.getWidth();
+    double height = gw.getHeight();
+    gw.drawLine(0, height / 2, width / 2, 0);
+    gw.drawLine(width / 2, 0, width, height / 2);
+    gw.drawLine(width, height / 2, width / 2, height);
+    gw.drawLine(width / 2, height, 0, height / 2);
+}
+
+void drawRectangleAndOval(GWindow &gw) {
+    double width = gw.getWidth();
+    double height = gw.getHeight();
+    gw.setColor("BLUE");
+    gw.fillRect(width / 4, height / 4, width / 2, height / 2);
+    gw.setColor("GRAY");
+    gw.fillOval(width / 4, height / 4, width / 2, height / 2);
 }
