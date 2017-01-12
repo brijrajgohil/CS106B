@@ -3,31 +3,33 @@
 
 using namespace std;
 
-void calculateEaster(int year);
+int myFact(int num);
+int calc(int a, int b);
 
 int main() {
-    calculateEaster(1744);
-    calculateEaster(1815);
+    int n, k;
+    cout << "Enter n ";
+    cin >> n;
+    cout << "Enter k ";
+    cin >> k;
+    int temp = n - k;
+    int perm = calc(n, temp);
+    cout << perm << endl;
     return 0;
 }
 
-void calculateEaster(int year) {
-    int a = year % 19;
-    int b = year % 4;
-    int c = year % 7;
-    int d = ((19 * a) + 23) % 30;
-    int e;
-    if(year >= 1700 && year <= 1799) {
-        e = ((2 * b) + (4 * c) + (6 * d) + 3) % 7;
-    } else if(year >= 1800 && year <= 1899) {
-        e = ((2 * b) + (4 * c) + (6 * d) + 4) % 7;
+int myFact(int num) {
+    int fact = 1;
+    for(int i = 1; i <= num; i++) {
+        fact *= i;
     }
+    return fact;
+}
 
-    if((d + e) > 9) {
-        cout << "April " << d + e - 9 << endl;
+int calc(int a, int b) {
+    int total = 1;
+    for(int i = a; i >= b; i--) {
+        total *= i;
     }
-    else {
-        cout << "March " << 22 + d + e << endl;
-    }
-
+    return total;
 }
