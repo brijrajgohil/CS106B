@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int myFact(int num);
-int calc(int a, int b);
+int calc(int num, int temp);
 
 int main() {
     int n, k;
@@ -18,17 +17,10 @@ int main() {
     return 0;
 }
 
-int myFact(int num) {
-    int fact = 1;
-    for(int i = 1; i <= num; i++) {
-        fact *= i;
-    }
-    return fact;
-}
 
-int calc(int a, int b) {
+int calc(int num, int temp) {
     int total = 1;
-    for(int i = a; i >= b; i--) {
+    for(int i = a; i > b; i--) {
         total *= i;
     }
     return total;
