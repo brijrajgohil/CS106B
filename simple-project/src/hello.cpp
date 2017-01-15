@@ -1,27 +1,27 @@
 #include <iostream>
 #include "console.h"
+#include "random.h"
 
 using namespace std;
 
-int calc(int num, int temp);
+void randomDecay(int &a);
 
 int main() {
-    int n, k;
-    cout << "Enter n ";
-    cin >> n;
-    cout << "Enter k ";
-    cin >> k;
-    int temp = n - k;
-    int perm = calc(n, temp);
-    cout << perm << endl;
+    int a = 10000, years = 1;
+    cout << "There are "<< a <<" atoms initially." << endl;
+    while(a > 0) {
+        randomDecay(a);
+        cout << " There are " << a << " atoms at the end of year " << years << endl;
+        years++;
+    }
     return 0;
 }
 
-
-int calc(int num, int temp) {
-    int total = 1;
-    for(int i = a; i > b; i--) {
-        total *= i;
+void randomDecay(int &a) {
+    for(int i = 1; i <= a; i++) {
+        if(randomChance(0.5))
+            continue;
+        else
+            a--;
     }
-    return total;
 }
