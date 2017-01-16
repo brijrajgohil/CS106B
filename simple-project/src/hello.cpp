@@ -1,56 +1,66 @@
-#include "gwindow.h"
 #include <iostream>
+#include "gwindow.h"
 
 using namespace std;
 
-double const RAINBOW_THICKNESS = 15.0;
-double const RAINBOW_SIZE = 200;
+double const SQUARE_SIZE = 50; // adjust this value to change everything's size.
+double const PIECE_SIZE = 0.85 * SQUARE_SIZE;
+double const PIECE_OFFSET = (SQUARE_SIZE - PIECE_SIZE) / 2;
+double const WINDOW_WIDTH = SQUARE_SIZE * 8;
 
-void setBackgroundColor(GWindow &gw);
-void drawRainbow(GWindow &gw);
-string colorToString(int color);
 
+void drawBoard(GWindow & gw);
+void drawGreySquare(GWindow & gw, int x, int y, double width);
+void drawWhiteSquare(GWindow & gw, int x, int y, double width);
+void drawRedPiece(GWindow & gw, int x, int y, double width);
+void drawBlackPiece(GWindow & gw, int x, int y, double width);
+
+
+/* main */
 int main() {
-    GWindow gw;
-    setBackgroundColor(gw);
-    drawRainbow(gw);
+    GWindow gw(WINDOW_WIDTH, WINDOW_WIDTH);
+    drawBoard(gw);
     return 0;
 }
 
-void setBackgroundColor(GWindow &gw) {
-    double width = gw.getWidth();
-    double height = gw.getHeight();
-    gw.setColor("CYAN");
-    gw.fillRect(0, 0, width, height);
-}
+void drawBoard(GWindow & gw) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            double x = SQUARE_SIZE * j;
+            double y = SQUARE_SIZE * i;
 
-void drawRainbow(GWindow &gw) {
-    for(int i = 1; i < 8; i++) {
-        double width = (gw.getWidth() + (RAINBOW_SIZE * 2) - (RAINBOW_THICKNESS * i) * 2);
-        double y = RAINBOW_THICKNESS * i;
-        double x = (RAINBOW_THICKNESS * i) - RAINBOW_SIZE;
-        gw.setColor(colorToString(i));
-        gw.fillOval(x, y, width, width);
+            if ((j + i) % 2 == 0) {
+                drawGreySquare(gw, x, y, SQUARE_SIZE);
+                if (i < 3) {
+                    drawRedPiece(gw, x + PIECE_OFFSET, y + PIECE_OFFSET, PIECE_SIZE);
+                }
+            } else {
+                drawWhiteSquare(gw, x, y, SQUARE_SIZE);
+                if (i > 4) {
+                    drawBlackPiece(gw, x + PIECE_OFFSET, y + PIECE_OFFSET, PIECE_SIZE);
+
+                }
+            }
+        }
     }
 }
 
-string colorToString(int color) {
-    switch (color) {
-            case 1:
-                return "RED";
-            case 2:
-                return "ORANGE";
-            case 3:
-                return "YELLOW";
-            case 4:
-                return "GREEN";
-            case 5:
-                return "BLUE";
-            case 6:
-                return "MAGENTA";
-            case 7:
-                return "CYAN";
-            default:
-                return "BLACK";
-    }
+void drawGreySquare(GWindow & gw, int x, int y, double width) {
+    gw.setColor("LIGHT_GRAY");
+    gw.fillRect(x, y, width, width);
+}
+
+void drawWhiteSquare(GWindow & gw, int x, int y, double width) {
+    gw.setColor("WHITE");
+    gw.fillRect(x, y, width, width);
+}
+
+void drawRedPiece(GWindow & gw, int x, int y, double width) {
+    gw.setColor("RED");
+    gw.fillOval(x, y, width, width);
+}
+
+void drawBlackPiece(GWindow & gw, int x, int y, double width) {
+    gw.setColor("BLACK");
+    gw.fillOval(x, y, width, width);
 }
