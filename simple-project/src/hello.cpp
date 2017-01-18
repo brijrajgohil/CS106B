@@ -4,23 +4,39 @@
 
 using namespace std;
 
-string myTrim(string str);
+string mySub(string str, int pos, int n);
+string mySub(string str, int pos);
 
 int main() {
-    cout << myTrim("Hello World") << endl; //returns HelloWorld
-    cout << myTrim("Cool    space    "); //returns Coolspace
+    cout << mySub("Hello world", 6) << endl; //returns "world"
+    cout << mySub("Hakuna matata", 9, 20) << endl; //returns "tata"
+    cout << mySub("Happy coding", 54) << endl; //returns error
     return 0;
 }
 
-string myTrim(string str) {
+string mySub(string str, int pos, int n) {
     string temp;
-    for(int i = 0; i < str.length(); i++) {
-        if(isspace(str[i])) {
-            continue;
-        }
-        else {
-            temp += str[i];
-        }
+    if(pos >= str.length()) {
+        return "Error";
+    }
+    int length = str.length();
+    if(n >= length || ((pos + n) >= str.length())) {
+        n = str.length() - 1;
+    }
+    for(int i = pos; i <= n; i++) {
+        temp += str[i];
+    }
+    return temp;
+}
+
+string mySub(string str, int pos) {
+    string temp;
+    if(pos >= str.length()) {
+        return "Error";
+    }
+    int length = str.length();
+    for(int i = pos; i < length; i++) {
+        temp += str[i];
     }
     return temp;
 }
