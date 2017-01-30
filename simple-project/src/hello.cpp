@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-string removeCharacters
+/*
+ * Will resume the course after February.
+ *
+ */
